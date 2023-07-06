@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from . import __version__ as app_version
 
 app_name = "flexone"
 app_title = "Flexone"
-app_publisher = "Shahzad Naser"
-app_description = "flexone"
-app_icon = "octicon octicon-file-directory"
-app_color = "grey"
-app_email = "shahzadnaser1122@gmail.com"
+app_publisher = "GreyCube Technologies"
+app_description = "Flexone for v12"
+app_icon = "fa fa-paint-brush"
+app_color = "gold"
+app_email = "admin@greycube.in"
 app_license = "MIT"
 
 # Includes in <head>
@@ -20,13 +22,6 @@ app_license = "MIT"
 # web_include_css = "/assets/flexone/css/flexone.css"
 # web_include_js = "/assets/flexone/js/flexone.js"
 
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "flexone/public/scss/website"
-
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
-
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 
@@ -38,14 +33,21 @@ app_license = "MIT"
 
 # Home Pages
 # ----------
+website_context = {
+    "favicon": "/assets/flexone/images/icon.png",
+    "splash_image": "/assets/flexone/images/logo.jpg",
+}
 
 # application home page (will override Website Settings)
 # home_page = "login"
-
+after_install = "flexone.api.import_arabic_translation"
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# 	"Role": "home_page"
 # }
+
+# Website user home page (by function)
+# get_website_user_home_page = "flexone.utils.get_home_page"
 
 # Generators
 # ----------
@@ -58,6 +60,7 @@ app_license = "MIT"
 
 # before_install = "flexone.install.before_install"
 # after_install = "flexone.install.after_install"
+after_migrate = "flexone.migrations.after_migrations"
 
 # Desk Notifications
 # ------------------
@@ -77,25 +80,18 @@ app_license = "MIT"
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+    "Sales Invoice": {"on_submit": "flexone.on_submit_sales_invoice"}
+    # 	"*": {
+    # 		"on_update": "method",
+    # 		"on_cancel": "method",
+    # 		"on_trash": "method"
+    # 	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -136,40 +132,3 @@ app_license = "MIT"
 # override_doctype_dashboards = {
 # 	"Task": "flexone.task.get_dashboard_data"
 # }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-
-# User Data Protection
-# --------------------
-
-user_data_fields = [
-	{
-		"doctype": "{doctype_1}",
-		"filter_by": "{filter_by}",
-		"redact_fields": ["{field_1}", "{field_2}"],
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_2}",
-		"filter_by": "{filter_by}",
-		"partial": 1,
-	},
-	{
-		"doctype": "{doctype_3}",
-		"strict": False,
-	},
-	{
-		"doctype": "{doctype_4}"
-	}
-]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"flexone.auth.validate"
-# ]
-
